@@ -1,0 +1,212 @@
+<div class="thorana-page" [class.running]="isRunning">
+  <div class="stars"></div>
+  <div class="festival-glow"></div>
+
+  <div class="music-control">
+    <button type="button" (click)="toggleMusic()">
+      {{ isMusicPlaying ? '🔇 Stop Audio' : '🎵 Play Default Music' }}
+    </button>
+  </div>
+
+  <audio #bgMusic loop>
+    <source [src]="defaultAudio" type="audio/mpeg">
+  </audio>
+
+  <audio #storyAudio>
+    <source [src]="currentStoryAudio" type="audio/mpeg">
+  </audio>
+
+  <header class="header">
+    <p class="subtitle">Digital Vesak Thorana</p>
+    <h1>වෙස්සන්තර ජාතකය</h1>
+    <p class="description">
+      දානය, කරුණාව, ඉවසීම සහ විශ්වාසය පෙන්වන උතුම් ජාතක කතාව
+    </p>
+  </header>
+
+  <main class="thorana-wrapper">
+    <section class="light-arch">
+      <div class="outer-arch">
+        <span
+          class="mega-bulb"
+          *ngFor="let light of outerLights; let i = index"
+          [style.animationDelay]="(i * 0.025) + 's'">
+        </span>
+      </div>
+    </section>
+
+    <section class="mandala-thorana">
+      <div class="center-stage">
+        <img [src]="centerImage" alt="Buddha Thorana Center Image">
+      </div>
+
+      <button
+        class="orbit-card orbit-1"
+        type="button"
+        [class.active]="selectedStoryIndex === 0"
+        (click)="selectStory(0)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[0].image" [alt]="stories[0].title">
+        <span class="story-badge">1</span>
+      </button>
+
+      <button
+        class="orbit-card orbit-2"
+        type="button"
+        [class.active]="selectedStoryIndex === 1"
+        (click)="selectStory(1)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[1].image" [alt]="stories[1].title">
+        <span class="story-badge">2</span>
+      </button>
+
+      <button
+        class="orbit-card orbit-3"
+        type="button"
+        [class.active]="selectedStoryIndex === 2"
+        (click)="selectStory(2)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[2].image" [alt]="stories[2].title">
+        <span class="story-badge">3</span>
+      </button>
+
+
+      <button
+        class="orbit-card orbit-4"
+        type="button"
+        [class.active]="selectedStoryIndex === 3"
+        (click)="selectStory(3)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[3].image" [alt]="stories[3].title">
+        <span class="story-badge">4</span>
+      </button>
+
+      <button
+        class="orbit-card orbit-5"
+        type="button"
+        [class.active]="selectedStoryIndex === 4"
+        (click)="selectStory(4)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[4].image" [alt]="stories[4].title">
+        <span class="story-badge">5</span>
+      </button>
+
+      <button
+        class="orbit-card orbit-6"
+        type="button"
+        [class.active]="selectedStoryIndex === 5"
+        (click)="selectStory(5)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[5].image" [alt]="stories[5].title">
+        <span class="story-badge">6</span>
+      </button>
+
+      <button
+        class="orbit-card orbit-7"
+        type="button"
+        [class.active]="selectedStoryIndex === 6"
+        (click)="selectStory(6)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[6].image" [alt]="stories[6].title">
+        <span class="story-badge">7</span>
+      </button>
+
+      <button
+        class="orbit-card orbit-8"
+        type="button"
+        [class.active]="selectedStoryIndex === 7"
+        (click)="selectStory(7)">
+
+        <div class="image-border-lights">
+          <span
+            class="image-bulb"
+            *ngFor="let light of imageLights; let j = index"
+            [style.animationDelay]="(j * 0.025) + 's'">
+          </span>
+        </div>
+
+        <img [src]="stories[7].image" [alt]="stories[7].title">
+        <span class="story-badge">8</span>
+      </button>
+    </section>
+
+    <section class="story-viewer">
+      <button class="arrow-btn" type="button" (click)="previousStory()">‹</button>
+
+      <div class="story-text-box">
+        <span class="panel-count">
+          {{ selectedStoryIndex + 1 }} / {{ stories.length }}
+        </span>
+
+        <h2>{{ selectedStory.title }}</h2>
+        <p>{{ selectedStory.description }}</p>
+      </div>
+
+      <button class="arrow-btn" type="button" (click)="nextStory()">›</button>
+    </section>
+
+    <section class="bottom-lights">
+      <span
+        class="small-bulb"
+        *ngFor="let light of bottomLights; let i = index"
+        [style.animationDelay]="(i * 0.025) + 's'">
+      </span>
+    </section>
+  </main>
+</div>
