@@ -638,10 +638,9 @@ body {
   justify-content: center;
   gap: 14px;
   padding: 14px 22px;
-  border-radius: 22px;
-  border: 1px solid rgba(255, 212, 90, 0.45);
-  background: rgba(0, 0, 0, 0.28);
-  box-shadow: 0 0 24px rgba(255, 212, 90, 0.22);
+  border: none;
+  background: transparent;
+  box-shadow: none;
   overflow: hidden;
 }
 
