@@ -38,7 +38,7 @@ body {
 }
 
 .landing-logo {
-  width: 120px;
+  width: 200px;
   height: auto;
   object-fit: contain;
   margin-bottom: 14px;
@@ -741,7 +741,7 @@ body {
 }
 
 .footer-logo {
-  width: 100px;
+  width: 200px;
   height: auto;
   object-fit: contain;
   flex-shrink: 0;
@@ -1207,7 +1207,7 @@ body {
   }
 
   .footer-logo {
-    width: 100px;
+    width: 200px;
   }
 
   .footer-content p {
@@ -1222,7 +1222,7 @@ body {
   }
 
   .landing-logo {
-    width: 100px;
+    width: 200px;
   }
 
   .landing-subtitle {
@@ -1317,7 +1317,7 @@ body {
   }
 
   .footer-logo {
-    width: 100px;
+    width: 200px;
   }
 
   .footer-content p {
