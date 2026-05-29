@@ -19,7 +19,6 @@ body {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  padding: 24px 18px 34px;
   color: #fff;
   background: radial-gradient(circle at top, rgba(255, 210, 85, 0.28), transparent 27%),
   radial-gradient(circle at bottom, rgba(41, 121, 255, 0.22), transparent 34%),
@@ -49,7 +48,8 @@ body {
 }
 
 .header,
-.thorana-wrapper {
+.thorana-wrapper,
+.thorana-footer {
   position: relative;
   z-index: 2;
 }
@@ -113,37 +113,45 @@ body {
   margin: 0 auto;
 }
 
-/* Top lights - no border, no inner arch */
+/* Top lights - exactly 2 rows */
 .light-arch {
   position: relative;
-  max-width: 1180px;
+  width: var(--thorana-width);
   margin: 0 auto 16px;
-  padding: 8px 14px 0;
+  padding: 8px 0 0;
 }
 
 .outer-arch {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 9px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(48, 1fr);
+  row-gap: 12px;
+  column-gap: 0;
   margin: 0 auto;
-  max-width: 1080px;
-  padding: 12px 20px;
+  padding: 12px 0;
   border: none;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
 
-/* Common light bulbs */
 .mega-bulb,
 .small-bulb {
-  width: 13px;
-  height: 13px;
   border-radius: 50%;
   opacity: 0.35;
   background: #ffd700;
   box-shadow: 0 0 14px #ffd700;
+}
+
+.mega-bulb {
+  justify-self: center;
+  width: clamp(6px, 1vw, 13px);
+  height: clamp(6px, 1vw, 13px);
+}
+
+.small-bulb {
+  width: 13px;
+  height: 13px;
 }
 
 .running .mega-bulb,
@@ -212,7 +220,7 @@ body {
   object-fit: cover;
 }
 
-/* Orbit story cards with same bulb pattern as bottom lights */
+/* Orbit story cards */
 .orbit-card {
   position: absolute;
   width: 205px;
@@ -246,7 +254,7 @@ body {
   box-shadow: 0 0 14px #ffd700;
 }
 
-/* Top row */
+/* Image border bulbs */
 .image-bulb:nth-child(1) {
   top: 0;
   left: 8%;
@@ -287,7 +295,6 @@ body {
   left: 92%;
 }
 
-/* Right side */
 .image-bulb:nth-child(9) {
   top: 12%;
   right: 0;
@@ -328,7 +335,6 @@ body {
   right: 0;
 }
 
-/* Bottom row */
 .image-bulb:nth-child(17) {
   bottom: 0;
   right: 8%;
@@ -369,7 +375,6 @@ body {
   right: 92%;
 }
 
-/* Left side */
 .image-bulb:nth-child(25) {
   bottom: 12%;
   left: 0;
@@ -541,7 +546,7 @@ body {
 
 /* Story text viewer */
 .story-viewer {
-  max-width: 1000px;
+  width: min(1000px, calc(100vw - 32px));
   margin: 24px auto 0;
   display: grid;
   grid-template-columns: 70px 1fr 70px;
@@ -606,12 +611,60 @@ body {
 
 /* Bottom lights */
 .bottom-lights {
+  width: min(1050px, calc(100vw - 32px));
   display: flex;
   justify-content: center;
   gap: 9px;
   flex-wrap: wrap;
   margin: 24px auto 0;
-  max-width: 1050px;
+}
+
+/* Footer */
+.thorana-footer {
+  position: relative;
+  z-index: 2;
+  width: min(1050px, calc(100vw - 32px));
+  max-width: 100%;
+  margin: 34px auto 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.footer-content {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 212, 90, 0.45);
+  background: rgba(0, 0, 0, 0.28);
+  box-shadow: 0 0 24px rgba(255, 212, 90, 0.22);
+  overflow: hidden;
+}
+
+.footer-logo {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.footer-content p {
+  margin: 0;
+  color: #e7e7ff;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+.footer-content span {
+  color: #ffe78a;
+  /*font-weight: 800;*/
+  text-shadow: 0 0 12px rgba(255, 212, 90, 0.55);
 }
 
 /* Animations */
@@ -708,6 +761,10 @@ body {
     height: 640px;
   }
 
+  .light-arch {
+    width: 96vw;
+  }
+
   .center-stage {
     width: 440px;
     height: 270px;
@@ -774,6 +831,10 @@ body {
     gap: 24px;
     padding: 24px;
     border-radius: 32px;
+  }
+
+  .light-arch {
+    width: 94vw;
   }
 
   .mandala-thorana::before,
@@ -857,7 +918,7 @@ body {
   }
 
   .story-viewer {
-    max-width: 94vw;
+    width: 94vw;
     grid-template-columns: 56px 1fr 56px;
     gap: 12px;
   }
@@ -876,10 +937,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .thorana-page {
-    padding: 74px 12px 28px;
-  }
-
   .music-control {
     top: 12px;
     right: 12px;
@@ -910,16 +967,21 @@ body {
   }
 
   .light-arch {
-    padding: 4px 4px 0;
+    width: 94vw;
+    padding: 4px 0 0;
     margin-bottom: 14px;
   }
 
   .outer-arch {
-    gap: 7px;
-    padding: 10px 8px;
+    grid-template-columns: repeat(48, 1fr);
+    row-gap: 10px;
   }
 
-  .mega-bulb,
+  .mega-bulb {
+    width: clamp(5px, 1.8vw, 10px);
+    height: clamp(5px, 1.8vw, 10px);
+  }
+
   .small-bulb {
     width: 10px;
     height: 10px;
@@ -963,6 +1025,7 @@ body {
   }
 
   .story-viewer {
+    width: 94vw;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -977,6 +1040,8 @@ body {
   .story-text-box {
     order: 1;
     flex: 0 0 100%;
+    padding: 18px 14px;
+    border-radius: 18px;
   }
 
   .story-viewer .arrow-btn:last-child {
@@ -991,11 +1056,6 @@ body {
     line-height: 36px;
   }
 
-  .story-text-box {
-    padding: 18px 14px;
-    border-radius: 18px;
-  }
-
   .story-text-box h2 {
     font-size: 23px;
     line-height: 1.35;
@@ -1007,6 +1067,7 @@ body {
   }
 
   .bottom-lights {
+    width: calc(100vw - 24px);
     gap: 7px;
     margin-top: 20px;
   }
@@ -1022,7 +1083,7 @@ body {
   }
 
   .footer-logo {
-    width: 44px;
+    width: 100px;
   }
 
   .footer-content p {
@@ -1031,16 +1092,26 @@ body {
 }
 
 @media (max-width: 480px) {
-  .thorana-page {
-    padding: 72px 10px 24px;
-  }
-
   .header h1 {
     font-size: 32px;
   }
 
   .description {
     font-size: 14px;
+  }
+
+  .light-arch {
+    width: 94vw;
+  }
+
+  .outer-arch {
+    grid-template-columns: repeat(48, 1fr);
+    row-gap: 8px;
+  }
+
+  .mega-bulb {
+    width: clamp(3px, 1.2vw, 6px);
+    height: clamp(3px, 1.2vw, 6px);
   }
 
   .center-stage {
@@ -1099,59 +1170,11 @@ body {
   }
 
   .footer-logo {
-    width: 42px;
+    width: 100px;
   }
 
   .footer-content p {
     font-size: 13px;
     line-height: 1.5;
   }
-}
-
-/* Footer */
-.thorana-footer {
-  position: relative;
-  z-index: 2;
-  width: min(1050px, calc(100vw - 32px));
-  max-width: 100%;
-  margin: 34px auto 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.footer-content {
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 14px 22px;
-  border-radius: 22px;
-  border: 1px solid rgba(255, 212, 90, 0.45);
-  background: rgba(0, 0, 0, 0.28);
-  box-shadow: 0 0 24px rgba(255, 212, 90, 0.22);
-  overflow: hidden;
-}
-
-.footer-logo {
-  width: 52px;
-  height: auto;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-.footer-content p {
-  margin: 0;
-  color: #e7e7ff;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-align: center;
-}
-
-.footer-content span {
-  color: #ffe78a;
-  font-weight: 800;
-  text-shadow: 0 0 12px rgba(255, 212, 90, 0.55);
 }

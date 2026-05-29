@@ -8,7 +8,7 @@
     </button>
   </div>
 
-  <audio #bgMusic loop>
+  <audio #bgMusic loop autoplay>
     <source [src]="defaultAudio" type="audio/mpeg">
   </audio>
 
@@ -17,6 +17,10 @@
   </audio>
 
   <header class="header">
+    <img
+      src="assets/vesak/logo-removebg.png"
+      alt="Arpico Insurance Logo"
+      class="footer-logo">
     <p class="subtitle">Digital Vesak Thorana</p>
     <h1>වෙස්සන්තර ජාතකය</h1>
     <p class="description">
@@ -186,6 +190,16 @@
       </button>
     </section>
 
+    <section class="light-arch">
+      <div class="outer-arch">
+        <span
+          class="mega-bulb"
+          *ngFor="let light of outerLights; let i = index"
+          [style.animationDelay]="(i * 0.025) + 's'">
+        </span>
+      </div>
+    </section>
+
     <section class="story-viewer">
       <button class="arrow-btn" type="button" (click)="previousStory()">‹</button>
 
@@ -201,23 +215,18 @@
       <button class="arrow-btn" type="button" (click)="nextStory()">›</button>
     </section>
 
-    <section class="bottom-lights">
+    <!--<section class="bottom-lights">
       <span
         class="small-bulb"
         *ngFor="let light of bottomLights; let i = index"
         [style.animationDelay]="(i * 0.025) + 's'">
       </span>
-    </section>
+    </section>-->
   </main>
 
   <footer class="thorana-footer">
     <div class="footer-content">
-      <img
-        src="assets/vesak/logo-removebg.png"
-        alt="Arpico Insurance Logo"
-        class="footer-logo">
-
-      <p>Developed by <span>Arpico Insurance IT Team</span></p>
+      <small>Powered by <span>Arpico Insurance PLC - IT</span></small>
     </div>
   </footer>
 </div>

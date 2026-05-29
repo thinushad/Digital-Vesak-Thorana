@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 
 interface StoryPanel {
   title: string;
@@ -15,7 +15,7 @@ interface StoryPanel {
   templateUrl: './digital-thorana.html',
   styleUrl: './digital-thorana.css',
 })
-export class DigitalThorana {
+export class DigitalThorana implements AfterViewInit {
   @ViewChild('bgMusic') bgMusic!: ElementRef<HTMLAudioElement>;
   @ViewChild('storyAudio') storyAudio!: ElementRef<HTMLAudioElement>;
 
@@ -25,7 +25,7 @@ export class DigitalThorana {
 
   centerImage = 'assets/vesak/buddha-center.png';
 
-  outerLights = Array.from({ length: 180 });
+  outerLights = Array.from({ length: 96 });
   bottomLights = Array.from({ length: 100 });
   imageLights = Array.from({ length: 32 });
 
@@ -180,5 +180,31 @@ export class DigitalThorana {
           this.cdr.detectChanges();
         });
     });
+  }
+
+  private playDefaultAudioOnLoad(): void {
+    const bgAudio = this.bgMusic.nativeElement;
+
+    bgAudio.volume = 0.25;
+    bgAudio.loop = true;
+
+    bgAudio
+      .play()
+      .then(() => {
+        this.currentStoryAudio = '';
+        this.isMusicPlaying = true;
+        this.cdr.detectChanges();
+      })
+      .catch((error) => {
+        console.warn('Autoplay blocked by browser:', error);
+        this.isMusicPlaying = false;
+        this.cdr.detectChanges();
+      });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.playDefaultAudioOnLoad();
+    }, 500);
   }
 }
