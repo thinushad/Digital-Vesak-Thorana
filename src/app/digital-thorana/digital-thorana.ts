@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 
 interface StoryPanel {
   title: string;
@@ -15,13 +15,14 @@ interface StoryPanel {
   templateUrl: './digital-thorana.html',
   styleUrl: './digital-thorana.css',
 })
-export class DigitalThorana implements AfterViewInit {
+export class DigitalThorana {
   @ViewChild('bgMusic') bgMusic!: ElementRef<HTMLAudioElement>;
   @ViewChild('storyAudio') storyAudio!: ElementRef<HTMLAudioElement>;
 
   isRunning = true;
   isMusicPlaying = false;
   selectedStoryIndex = 0;
+  isThoranaVisible = false;
 
   centerImage = 'assets/vesak/buddha-center.png';
 
@@ -33,6 +34,15 @@ export class DigitalThorana implements AfterViewInit {
   currentStoryAudio = '';
 
   constructor(private cdr: ChangeDetectorRef) {}
+
+  openThorana(): void {
+    this.isThoranaVisible = true;
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.playDefaultAudio();
+    }, 100);
+  }
 
   stories: StoryPanel[] = [
     {
@@ -132,21 +142,7 @@ export class DigitalThorana implements AfterViewInit {
       return;
     }
 
-    bgAudio.volume = 0.35;
-    bgAudio.loop = true;
-
-    bgAudio
-      .play()
-      .then(() => {
-        this.currentStoryAudio = '';
-        this.isMusicPlaying = true;
-        this.cdr.detectChanges();
-      })
-      .catch((error) => {
-        console.error('Default audio play failed:', error);
-        this.isMusicPlaying = false;
-        this.cdr.detectChanges();
-      });
+    this.playDefaultAudio();
   }
 
   private playStoryAudio(index: number): void {
@@ -182,11 +178,18 @@ export class DigitalThorana implements AfterViewInit {
     });
   }
 
-  private playDefaultAudioOnLoad(): void {
+  private playDefaultAudio(): void {
     const bgAudio = this.bgMusic.nativeElement;
+    const storyAudioEl = this.storyAudio?.nativeElement;
 
-    bgAudio.volume = 0.25;
+    if (storyAudioEl) {
+      storyAudioEl.pause();
+      storyAudioEl.currentTime = 0;
+    }
+
+    bgAudio.volume = 0.35;
     bgAudio.loop = true;
+    bgAudio.currentTime = 0;
 
     bgAudio
       .play()
@@ -196,15 +199,9 @@ export class DigitalThorana implements AfterViewInit {
         this.cdr.detectChanges();
       })
       .catch((error) => {
-        console.warn('Autoplay blocked by browser:', error);
+        console.error('Default audio play failed:', error);
         this.isMusicPlaying = false;
         this.cdr.detectChanges();
       });
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.playDefaultAudioOnLoad();
-    }, 500);
   }
 }

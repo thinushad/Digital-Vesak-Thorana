@@ -15,6 +15,102 @@ body {
   box-sizing: border-box;
 }
 
+/* Landing Page */
+.landing-page {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.landing-card {
+  width: min(680px, calc(100vw - 32px));
+  padding: 38px 28px;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 212, 90, 0.45);
+  background: rgba(0, 0, 0, 0.36);
+  box-shadow: 0 0 42px rgba(255, 212, 90, 0.28),
+  inset 0 0 24px rgba(255, 255, 255, 0.06);
+}
+
+.landing-logo {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 14px;
+}
+
+.landing-subtitle {
+  margin: 0 0 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ffd45a;
+  font-size: 13px;
+}
+
+.landing-card h1 {
+  margin: 0;
+  font-size: clamp(38px, 7vw, 74px);
+  color: #ffe78a;
+  text-shadow: 0 0 14px rgba(255, 213, 75, 0.9),
+  0 0 42px rgba(255, 179, 0, 0.45);
+}
+
+.landing-description {
+  max-width: 560px;
+  margin: 16px auto 28px;
+  color: #e7e7ff;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.view-thorana-btn {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 212, 90, 0.9);
+  border-radius: 999px;
+  padding: 14px 34px;
+  color: #170b00;
+  background: linear-gradient(135deg, #fff0a8, #ffb300);
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 28px rgba(255, 179, 0, 0.6);
+  transition: 0.25s ease;
+  animation: viewButtonPulse 1.6s infinite ease-in-out;
+}
+
+.view-thorana-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -90%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.75),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: viewButtonShine 2.2s infinite;
+}
+
+.view-thorana-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 38px rgba(255, 179, 0, 0.95),
+  0 0 60px rgba(255, 212, 90, 0.45);
+}
+
+.view-thorana-btn:active {
+  transform: scale(0.96);
+}
+
 .thorana-page {
   min-height: 100vh;
   position: relative;
@@ -667,6 +763,35 @@ body {
 }
 
 /* Animations */
+@keyframes viewButtonPulse {
+  0% {
+    box-shadow: 0 0 18px rgba(255, 179, 0, 0.45);
+  }
+
+  50% {
+    box-shadow: 0 0 36px rgba(255, 179, 0, 0.95),
+    0 0 58px rgba(255, 212, 90, 0.35);
+  }
+
+  100% {
+    box-shadow: 0 0 18px rgba(255, 179, 0, 0.45);
+  }
+}
+
+@keyframes viewButtonShine {
+  0% {
+    left: -90%;
+  }
+
+  45% {
+    left: 130%;
+  }
+
+  100% {
+    left: 130%;
+  }
+}
+
 @keyframes thoranaWave {
   0% {
     opacity: 0.2;
@@ -1091,6 +1216,29 @@ body {
 }
 
 @media (max-width: 480px) {
+  .landing-card {
+    padding: 30px 18px;
+    border-radius: 24px;
+  }
+
+  .landing-logo {
+    width: 100px;
+  }
+
+  .landing-subtitle {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .landing-description {
+    font-size: 15px;
+  }
+
+  .view-thorana-btn {
+    padding: 12px 28px;
+    font-size: 15px;
+  }
+
   .header h1 {
     font-size: 32px;
   }
